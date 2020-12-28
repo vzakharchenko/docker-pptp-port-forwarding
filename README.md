@@ -7,7 +7,7 @@
 ### Automatic cloud installation
 ```
 sudo apt-get update && sudo apt-get install -y curl
-curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwarding/ubuntu.install -o ubuntu.install
+curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwarding/main/ubuntu.install -o ubuntu.install
 chmod +x ubuntu.install
 ./ubuntu.install
 ```

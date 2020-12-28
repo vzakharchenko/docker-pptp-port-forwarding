@@ -11,7 +11,8 @@ function ifRoutesUp(userInfo) {
         return "";
     }
     const lines = [];
-    lines.push('if [[ "x${$5}" = ' + `"x${userInfo.ip}" ]]; then`);
+    lines.push('PPP_REMOTE="$5"');
+    lines.push('if [[ "x${PPP_REMOTE}" = ' + `"x${userInfo.ip}" ]]; then`);
     userInfo.routing.forEach((v) => {
         lines.push(` /sbin/ip route add ${v.route} dev  $1`);
     });

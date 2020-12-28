@@ -11,7 +11,7 @@ if [[ "x${EUID}" != "x0" ]]; then
   exit 1
 fi
 
-FILE=/opt/ppp/config.json
+FILE=/opt/config.json
 if [[ ! -f "$FILE" ]]; then
     echo "$FILE does not exist."
     exit 1

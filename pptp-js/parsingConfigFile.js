@@ -11,7 +11,6 @@ function ifRoutesUp(userInfo) {
         return "";
     }
     const lines = [];
-    lines.push('PPP_REMOTE="$5"');
     lines.push('if [[ "x${PPP_REMOTE}" = ' + `"x${userInfo.ip}" ]]; then`);
     userInfo.routing.forEach((v) => {
         lines.push(` /sbin/ip route add ${v.route} dev  $1`);
@@ -25,7 +24,7 @@ function parseFile(cJson) {
     const ips = {};
     const ports = {};
     let secrets = '';
-    let routesUp = '';
+    let routesUp = 'PPP_REMOTE="$5"';
     let redir = '';
     Object.entries(cJson).forEach((entry) => {
         const user = entry[0];

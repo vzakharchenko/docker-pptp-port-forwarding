@@ -11,11 +11,12 @@ function ifRoutesUp(userInfo) {
         return "";
     }
     const lines = [];
-    lines.push('if [[ "x${PPP_REMOTE}" = ' + `"x${userInfo.ip}" ]]; then`);
+    lines.push(
+        userInfo.ip+')\n');
     userInfo.routing.forEach((v) => {
-        lines.push(` /sbin/ip route add ${v.route} dev  $1`);
+        lines.push(` /sbin/ip route add ${v.route} dev  $1\n`);
     });
-    lines.push(`fi\n`);
+    lines.push(`;;\n`);
     return lines.join('\n');
 }
 
@@ -24,7 +25,8 @@ function parseFile(cJson) {
     const ips = {};
     const ports = {};
     let secrets = '';
-    let routesUp = 'PPP_REMOTE="$5"';
+    let routesUp = '#!/bin/bash\n' +
+        'case "$5" in\n';
     let redir = '';
     Object.entries(cJson).forEach((entry) => {
         const user = entry[0];
@@ -44,6 +46,7 @@ function parseFile(cJson) {
         ips[value.ip] = {user};
         secrets = secrets + user + '    pptpd   ' + value.password + '    ' + value.ip + '\n';
         routesUp = routesUp + ifRoutesUp(value);
+
         if (value.forwarding){
             value.forwarding.forEach((f) => {
                 if (ports[f.destinationPort]) {
@@ -53,7 +56,12 @@ function parseFile(cJson) {
                 redir = redir + `redir -s :${f.destinationPort} ${f.sourceIp}:${f.sourcePort}\n`
             })
         }
+
     });
+    routesUp = routesUp +
+        '*)\n' +
+        'esac\n' +
+        'exit 0';
     fs.writeFileSync(secretPath, secrets);
     fs.writeFileSync(routesUpPath, routesUp);
     fs.writeFileSync(redirPath, redir);

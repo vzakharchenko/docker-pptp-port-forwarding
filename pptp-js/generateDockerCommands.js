@@ -31,7 +31,7 @@ function parseFile(cJson) {
     });
 
     console.log('docker run -d --name=pptp-port-forwarding -p 1723:1723 ' + redir +
-        '-v /opt/ppp/chap-secrets:/etc/ppp/chap-secrets --privileged --restart=always pptp-port-forwarding')
+        `-v ${configPath}:/opt/config.json --privileged --restart=always pptp-port-forwarding`)
 }
 
 const f = fs.readFileSync(configPath, 'utf8');

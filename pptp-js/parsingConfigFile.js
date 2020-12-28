@@ -32,6 +32,9 @@ function parseFile(cJson) {
         if (!value.ip) {
             throw new Error(user + " does not have RemoteIp address")
         }
+        if (!value.ip.startsWith('192.168.122.')) {
+            throw new Error(user + " has wrong Ip address. Ip address should startWith 192.168.122")
+        }
         if (!value.password) {
             throw new Error(user + " does not have password")
         }

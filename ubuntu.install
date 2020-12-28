@@ -1,0 +1,62 @@
+#!/bin/bash
+set -e
+export DEBIAN_FRONTEND=noninteractive
+export CONFIG_PATH=/opt/config.json
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+if [[ "x${EUID}" != "x0" ]]; then
+  printf "${RED}Please run as root${NC}\n"
+  exit 1
+fi
+
+FILE=/opt/ppp/config.json
+if [[ ! -f "$FILE" ]]; then
+    echo "$FILE does not exist."
+fi
+
+printf "${CYAN}Starting installing Docker${NC}\n"
+apt-get update && sudo apt-get install -y iptables git iptables-persistent nodejs
+apt-get remove docker docker.io containerd runc
+curl -sSL https://get.docker.com | bash
+set +e
+groupadd docker
+usermod -aG docker $USER
+#newgrp docker
+set -e
+printf "${GREEN}Docker successfully installed${NC}\n"
+
+printf "${CYAN}Cloning Project${NC}\n"
+rm -rf /opt/docker-pptp-port-forwarding
+mkdir -p /opt/docker-pptp-port-forwarding
+git clone https://github.com/vzakharchenko/docker-pptp-port-forwarding /opt/docker-pptp-port-forwarding
+chown -R $(whoami):$(whoami) /opt/docker-pptp-port-forwarding
+printf "${GREEN}docker-pptp-port-forwarding cloned${NC}\n"
+
+printf  "${CYAN}Starting configuring host${NC}\n"
+echo "nf_nat_pptp" >> /etc/modules
+echo "ip_gre" >> /etc/modules
+iptables -I FORWARD -p gre -j ACCEPT
+sudo iptables-save > /etc/iptables/rules.v4
+printf "${GREEN}IpTables successfully configured${NC}"
+sysctl -w net.ipv4.ip_forward=1
+sysctl -w net.netfilter.nf_conntrack_helper=1
+sudo echo "net.ipv4.ip_forward=1">/etc/sysctl.conf
+sudo echo "net.netfilter.nf_conntrack_helper=1">/etc/sysctl.conf
+printf "${GREEN}enabled IP forwarding${NC}\n"
+
+printf "${CYAN}running docker image${NC}\n"
+set +e
+docker stop pptp-port-forwarding
+docker rm pptp-port-forwarding
+docker image prune -a -f
+set -e
+
+printf "${CYAN}installing Docker image${NC}\n"
+cd /opt/docker-pptp-port-forwarding
+docker build -t pptp-port-forwarding .
+curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwarding/pptp-js/generateDockerCommands.js -o generateDockerCommands.js
+/bin/bash -c `node generateDockerCommands.js`
+printf "${CYAN}Rebooting${NC}\n"
+reboot

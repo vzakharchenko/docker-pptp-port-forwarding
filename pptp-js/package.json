@@ -1,0 +1,25 @@
+{
+  "name": "pptp-js",
+  "version": "1.0.0",
+  "description": "parsing config file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vzakharchenko/docker-pptp-port-forwarding.git"
+  },
+  "keywords": [
+    "docker",
+    "pptp",
+    "port",
+    "forwarding"
+  ],
+  "author": "Vasyl Zakharchenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vzakharchenko/docker-pptp-port-forwarding/issues"
+  },
+  "homepage": "https://github.com/vzakharchenko/docker-pptp-port-forwarding#readme"
+}

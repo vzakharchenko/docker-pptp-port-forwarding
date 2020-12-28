@@ -1,0 +1,36 @@
+{
+  "users": {
+    "user1": {
+      "password": "password1",
+      "ip": "192.168.122.10",
+      "forwarding": [{
+        "sourceIp": "192.168.8.1",
+        "sourcePort": "80",
+        "destinationPort": 8888
+      }],
+      "routing": [
+        {
+          "route": "192.168.8.0/24"
+        }
+      ]
+    },
+    "user2": {
+      "password": "password2",
+      "ip": "192.168.122.11",
+      "forwarding": [{
+        "sourceIp": "192.168.18.1",
+        "sourcePort": "87",
+        "destinationPort": 8889
+      }],
+      "routing": [
+        {
+          "route": "192.168.18.0/24"
+        }
+      ]
+    },
+    "user3": {
+      "password": "password3",
+      "ip": "192.168.122.12"
+    }
+  }
+}

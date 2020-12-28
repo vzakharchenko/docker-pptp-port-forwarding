@@ -13,7 +13,6 @@ COPY ./etc/rsyslog.d/50-default.conf /etc/rsyslog.d/50-default.conf
 COPY ./etc/pptpd.conf /etc/pptpd.conf
 COPY ./etc/ppp/pptpd-options /etc/ppp/pptpd-options
 COPY ./pptp-js/parsingConfigFile.js /opt/parsingConfigFile.js
-RUN chmod +x /etc/ppp/ip-up.d/routes-up
 RUN chmod 777 /etc/iptables/rules.v4
 COPY entrypoint.sh /entrypoint.sh
 RUN  chmod +x /entrypoint.sh

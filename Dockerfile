@@ -20,8 +20,5 @@ ENV CONFIG_PATH  /opt/config.json
 ENV SECRET_PATH  /etc/ppp/chap-secrets
 ENV ROUTES_UP  /etc/ppp/ip-up.d/routes-up
 ENV REDIR_SH  /opt/redir.sh
-RUN  node /opt/parsingConfigFile.js
-RUN  chmod +x /opt/redir.sh
-RUN  chmod +x /etc/ppp/ip-up.d/routes-up
 EXPOSE 1723
 ENTRYPOINT ["/entrypoint.sh"]

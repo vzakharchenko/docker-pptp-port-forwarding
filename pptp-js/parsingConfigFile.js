@@ -26,6 +26,7 @@ function parseFile(cJson) {
     const ports = {};
     let secrets = '';
     let routesUp = '#!/bin/bash\n' +
+        'logger "setup routing for $5" \n'+
         'case "$5" in\n';
     let redir = '';
     Object.entries(cJson).forEach((entry) => {

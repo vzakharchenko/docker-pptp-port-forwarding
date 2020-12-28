@@ -57,7 +57,7 @@ set -e
 printf "${CYAN}installing Docker image${NC}\n"
 cd /opt/docker-pptp-port-forwarding
 docker build -t pptp-port-forwarding .
-curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwarding/pptp-js/generateDockerCommands.js -o generateDockerCommands.js
+curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwarding/main/pptp-js/generateDockerCommands.js -o generateDockerCommands.js
 /bin/bash -c `node generateDockerCommands.js`
 printf "${CYAN}Rebooting${NC}\n"
 reboot

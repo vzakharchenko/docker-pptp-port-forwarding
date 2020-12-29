@@ -1,10 +1,13 @@
 # Docker image with PPTP server including routing and port forwarding
 
 ## Description
-Access private network from the internet, support port forwarding from private network to outside via cloud.
+Access private network from the internet, support port forwarding from private network to outside via cloud.  
+  
+[GitHub Project](https://github.com/vzakharchenko/docker-pptp-port-forwarding)
+  
 ## Example
 ![](https://github.com/vzakharchenko/docker-pptp-port-forwarding/blob/main/img/pptpWithRouting.png?raw=true)
-[GitHub Project](https://github.com/vzakharchenko/docker-pptp-port-forwarding)
+
 
 ## Features
  - Docker image

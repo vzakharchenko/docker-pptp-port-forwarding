@@ -1,6 +1,6 @@
-dockebuild -t docker-pptp-port-forwarding .
-docker tag  docker-pptp-port-forwarding vassio/docker-pptp-port-forwarding:1.0.0
-docker push vassio/docker-pptp-port-forwarding:1.0.0
+dockebuild -t pptp-port-forwarding .
+docker tag  pptp-port-forwarding vassio/pptp-port-forwarding:1.0.0
+docker push vassio/pptp-port-forwarding:1.0.0
 
-docker tag  docker-pptp-port-forwarding vassio/docker-pptp-port-forwarding:latest
-docker push vassio/docker-pptp-port-forwarding:latest
+docker tag  pptp-port-forwarding vassio/pptp-port-forwarding:latest
+docker push vassio/pptp-port-forwarding:latest

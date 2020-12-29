@@ -13,7 +13,7 @@ Access private network from the internet, support port forwarding from private n
  - Docker image
  - [Management routing  and portforwarding using json file](#configjson-structure)
  - [Connect to LAN from the internet](#connect-to-lan-from-the--internet)
- - [Port forwarding](#port-forwarding)
+ - [Port forwarding through VPN (PPTP)](#port-forwarding)
  - [Connect multiple networks](#connect-multiple-networks)
  - [Automatic installation(Ubuntu)](#automatic-cloud-installation)
  - [Manual Installation steps (Ubuntu)](#manual-cloud-installationubuntu)

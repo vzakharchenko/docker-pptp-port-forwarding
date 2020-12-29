@@ -7,15 +7,22 @@ const redirPath = process.env['REDIR_SH'] || 'redir.sh';
 
 
 function ifRoutesUp(userInfo) {
-    if (!userInfo.routing) {
+    if (!userInfo.routing && !userInfo.forwarding) {
         return "";
     }
     const lines = [];
     lines.push(
-        userInfo.ip+')\n');
+        userInfo.ip + ')\n');
     userInfo.routing.forEach((v) => {
         lines.push(` /sbin/ip route add ${v.route} dev  $1\n`);
     });
+
+    if (userInfo.forwarding) {
+        userInfo.forwarding.forEach((f) => {
+            lines.push(` /sbin/ip route add ${f.sourceIp} dev  $1\n`);
+        })
+    }
+
     lines.push(`;;\n`);
     return lines.join('\n');
 }
@@ -26,7 +33,7 @@ function parseFile(cJson) {
     const ports = {};
     let secrets = '';
     let routesUp = '#!/bin/bash\n' +
-        'logger "setup routing for $5" \n'+
+        'logger "setup routing for $5" \n' +
         'case "$5" in\n';
     let redir = '';
     Object.entries(cJson).forEach((entry) => {
@@ -48,7 +55,7 @@ function parseFile(cJson) {
         secrets = secrets + user + '    pptpd   ' + value.password + '    ' + value.ip + '\n';
         routesUp = routesUp + ifRoutesUp(value);
 
-        if (value.forwarding){
+        if (value.forwarding) {
             value.forwarding.forEach((f) => {
                 if (ports[f.destinationPort]) {
                     throw new Error(f.destinationPort + " already exists. user " + ports[f.destinationPort].user)

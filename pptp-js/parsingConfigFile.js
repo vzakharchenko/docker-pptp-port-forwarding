@@ -13,9 +13,11 @@ function ifRoutesUp(userInfo) {
     const lines = [];
     lines.push(
         userInfo.ip + ')\n');
-    userInfo.routing.forEach((v) => {
-        lines.push(` /sbin/ip route add ${v.route} dev  $1\n`);
-    });
+    if (userInfo.routing) {
+        userInfo.routing.forEach((v) => {
+            lines.push(` /sbin/ip route add ${v.route} dev  $1\n`);
+        });
+    }
 
     if (userInfo.forwarding) {
         userInfo.forwarding.forEach((f) => {

@@ -16,7 +16,7 @@ Access private network from the internet, support port forwarding from private n
  - [Port forwarding](#port-forwarding)  
  - [Connect multiple networks](#connect-multiple-networks)  
  - [Automatic installation(Ubuntu)](#automatic-cloud-installation)  
- - [Manual Installation steps (Ubuntu)](#manual-cloud-installationubuntu)  
+ - [Manual Installation steps (Ubuntu)](#manual-cloud-installationubuntu) 
 
 ## config.json structure
 
@@ -139,6 +139,12 @@ Subnet contains service http://192.168.8.1:80 which is available at from http://
 }
 ```
 
+
+## Troubleshooting
+Viewing logs in docker container:
+```
+docker logs remote-ctrl -f
+```
 
 ## Cloud Installation
 ### Automatic cloud installation

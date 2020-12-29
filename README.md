@@ -142,7 +142,7 @@ Subnet contains service http://192.168.8.1:80 which is available at from http://
 
 ## Cloud Installation
 ### Automatic cloud installation
-[create /opt/config.json](#configjson-structure)
+[create /opt/config.json](#configjson-structure)  
 ```
 sudo apt-get update && sudo apt-get install -y curl
 curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwarding/main/ubuntu.install -o ubuntu.install
@@ -176,10 +176,10 @@ sysctl -w net.netfilter.nf_conntrack_helper=1
 sudo echo "net.ipv4.ip_forward=1">/etc/sysctl.conf
 sudo echo "net.netfilter.nf_conntrack_helper=1">/etc/sysctl.conf
 ```
-4. create config.json
+4. [create /opt/config.json](#configjson-structure)  
 
 5. start docker image
-[create /opt/config.json](#configjson-structure)
+
 ```
 export CONFIG_PATH=/opt/config.json
 curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwarding/main/pptp-js/generateDockerCommands.js -o generateDockerCommands.js

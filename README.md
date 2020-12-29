@@ -12,9 +12,6 @@ curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwa
 chmod +x ubuntu.install
 ./ubuntu.install
 ```  
-## Example
-![](https://github.com/vzakharchenko/docker-pptp-port-forwarding/blob/main/img/pptpWithRouting.png?raw=true)
-
 
 ## Features
  - Docker image

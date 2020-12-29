@@ -4,7 +4,14 @@
 Access private network from the internet, support port forwarding from private network to outside via cloud.
 
 [GitHub Project](https://github.com/vzakharchenko/docker-pptp-port-forwarding)
-
+## Installation :
+[create /opt/config.json](#configjson-structure)  
+```
+sudo apt-get update && sudo apt-get install -y curl
+curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwarding/main/ubuntu.install -o ubuntu.install
+chmod +x ubuntu.install
+./ubuntu.install
+```  
 ## Example
 ![](https://github.com/vzakharchenko/docker-pptp-port-forwarding/blob/main/img/pptpWithRouting.png?raw=true)
 

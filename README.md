@@ -3,7 +3,7 @@
 ## Description
 Access private network from the internet, support port forwarding from private network to outside via cloud.
 ## Example
-![](./img/pptpWithRouting.png)
+![](https://github.com/vzakharchenko/docker-pptp-port-forwarding/blob/main/img/pptpWithRouting.png?raw=true)
 [GitHub Project](https://github.com/vzakharchenko/docker-pptp-port-forwarding)
 
 ## Features
@@ -12,6 +12,8 @@ Access private network from the internet, support port forwarding from private n
  - [Connect to LAN from the internet](#connect-to-lan-from-the--internet)  
  - [Port forwarding](#port-forwarding)  
  - [Connect multiple networks](#connect-multiple-networks)  
+ - [Automatic installation(Ubuntu)](#automatic-cloud-installation)  
+ - [Manual Installation steps (Ubuntu)](#manual-cloud-installationubuntu)  
 
 ## config.json structure
 

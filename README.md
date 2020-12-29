@@ -8,10 +8,10 @@ Access private network from the internet, support port forwarding from private n
 
 ## Features
  - Docker image
- - Management routing from json file
- - Connect to LAN from the internet
- - Port forwarding
- - Connect multiple networks
+ - [Management routing  and portforwarding using json file](#configjson-structure) 
+ - [Connect to LAN from the internet](#connect-to-lan-from-the--internet)  
+ - [Port forwarding](#port-forwarding)  
+ - [Connect multiple networks](#connect-multiple-networks)  
 
 ## config.json structure
 
@@ -36,20 +36,20 @@ Access private network from the internet, support port forwarding from private n
 }
 ```
 Where
-- **USER_NAME** username or email
-- **PASSWORD** user password
-- **192.168.122.XX** uniq ip from range 192.168.122.10-192.168.122.254
-- **APPLICATION_IP** service IP behind NAT (port forwarding)
-- **APPLICATION_PORT** service PORT behind NAT (port forwarding)
-- **REMOTE_PORT**  port accessible from the internet (port forwarding)
-- **REMOTE_PORT**  port accessible from the internet (port forwarding)
-- **ROUTING_TABLE**  ip with subnet for example 192.168.8.0/24
+- **USER_NAME** username or email  
+- **PASSWORD** user password  
+- **192.168.122.XX** uniq ip from range 192.168.122.10-192.168.122.254  
+- **APPLICATION_IP** service IP behind NAT (port forwarding)  
+- **APPLICATION_PORT** service PORT behind NAT (port forwarding)  
+- **REMOTE_PORT**  port accessible from the internet (port forwarding)  
+- **REMOTE_PORT**  port accessible from the internet (port forwarding)  
+- **ROUTING_TABLE**  ip with subnet for example 192.168.8.0/24  
 
 ## Examples
 
 ### Connect to LAN from the  internet
-**user1** - router with subnet 192.168.8.0/24 behind NAT
-**user2** - user who has access to subnet 192.168.8.0/24 from the Internet
+**user1** - router with subnet 192.168.8.0/24 behind NAT  
+**user2** - user who has access to subnet 192.168.8.0/24 from the Internet  
 ```
 {
   "users": {
@@ -71,8 +71,8 @@ Where
 ```
 
 ### Port forwarding
-**user** - router with subnet 192.168.8.0/24 behind NAT.
-Subnet contains service http://192.168.8.1:80 which is available at from http://publicip.com:8888
+**user** - router with subnet 192.168.8.0/24 behind NAT.  
+Subnet contains service http://192.168.8.1:80 which is available at from http://publicip.com:8888  
 
 ```
 {
@@ -90,10 +90,10 @@ Subnet contains service http://192.168.8.1:80 which is available at from http://
 }
 ```
 ### connect multiple networks
-**user** - router with subnet 192.168.7.0/24 behind NAT. Subnet contains service http://192.168.7.1:80 which is available at from http://publicip.com:8888
-**user1** - router with subnet 192.168.111.0/24 behind NAT.
-**user2** - router with subnet 192.168.100.0/24 behind NAT.
-**user3** - user who has access to subnets 192.168.111.0/24 and 192.168.100.0/24 from the Internet
+**user** - router with subnet 192.168.7.0/24 behind NAT. Subnet contains service http://192.168.7.1:80 which is available at from http://publicip.com:8888  
+**user1** - router with subnet 192.168.111.0/24 behind NAT.  
+**user2** - router with subnet 192.168.100.0/24 behind NAT.  
+**user3** - user who has access to subnets 192.168.111.0/24 and 192.168.100.0/24 from the Internet  
 ```
 {
   "users": {
@@ -137,7 +137,7 @@ Subnet contains service http://192.168.8.1:80 which is available at from http://
 
 ## Cloud Installation
 ### Automatic cloud installation
-create /opt/config.json
+[create /opt/config.json](#configjson-structure)
 ```
 sudo apt-get update && sudo apt-get install -y curl
 curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwarding/main/ubuntu.install -o ubuntu.install
@@ -174,8 +174,9 @@ sudo echo "net.netfilter.nf_conntrack_helper=1">/etc/sysctl.conf
 4. create config.json
 
 5. start docker image
+[create /opt/config.json](#configjson-structure)
 ```
-export CONFIG_PATH=`pwd`/config.json
+export CONFIG_PATH=/opt/config.json
 curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwarding/main/pptp-js/generateDockerCommands.js -o generateDockerCommands.js
 `node generateDockerCommands.js`
 ```

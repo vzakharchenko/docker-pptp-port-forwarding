@@ -28,13 +28,6 @@ usermod -aG docker $USER
 set -e
 printf "${GREEN}Docker successfully installed${NC}\n"
 
-printf "${CYAN}Cloning Project${NC}\n"
-rm -rf /opt/docker-pptp-port-forwarding
-mkdir -p /opt/docker-pptp-port-forwarding
-git clone https://github.com/vzakharchenko/docker-pptp-port-forwarding /opt/docker-pptp-port-forwarding
-chown -R $(whoami):$(whoami) /opt/docker-pptp-port-forwarding
-printf "${GREEN}docker-pptp-port-forwarding cloned${NC}\n"
-
 printf  "${CYAN}Starting configuring host${NC}\n"
 echo "nf_nat_pptp" >> /etc/modules
 echo "ip_gre" >> /etc/modules
@@ -55,8 +48,6 @@ docker image prune -a -f
 set -e
 
 printf "${CYAN}installing Docker image${NC}\n"
-cd /opt/docker-pptp-port-forwarding
-docker build -t pptp-port-forwarding .
 curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwarding/main/pptp-js/generateDockerCommands.js -o generateDockerCommands.js
 `node generateDockerCommands.js`
 printf "${CYAN}Rebooting${NC}\n"

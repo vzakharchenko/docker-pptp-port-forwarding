@@ -31,7 +31,7 @@ function parseFile(cJson) {
     });
 
     console.log('docker run -d --name=pptp-port-forwarding -p 1723:1723 ' + redir +
-        `-v ${configPath}:/opt/config.json --privileged --restart=always pptp-port-forwarding`)
+        `-v ${configPath}:/opt/config.json --privileged --restart=always vassio/pptp-port-forwarding:latest`)
 }
 
 const f = fs.readFileSync(configPath, 'utf8');

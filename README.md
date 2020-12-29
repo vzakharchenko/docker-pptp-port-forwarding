@@ -143,7 +143,7 @@ Subnet contains service http://192.168.8.1:80 which is available at from http://
 ## Troubleshooting
 Viewing logs in docker container:
 ```
-docker logs remote-ctrl -f
+docker logs pptp-port-forwarding -f
 ```
 
 ## Cloud Installation

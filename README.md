@@ -1,22 +1,22 @@
 # Docker image with PPTP server including routing and port forwarding
 
 ## Description
-Access private network from the internet, support port forwarding from private network to outside via cloud.  
-  
+Access private network from the internet, support port forwarding from private network to outside via cloud.
+
 [GitHub Project](https://github.com/vzakharchenko/docker-pptp-port-forwarding)
-  
+
 ## Example
 ![](https://github.com/vzakharchenko/docker-pptp-port-forwarding/blob/main/img/pptpWithRouting.png?raw=true)
 
 
 ## Features
  - Docker image
- - [Management routing  and portforwarding using json file](#configjson-structure) 
- - [Connect to LAN from the internet](#connect-to-lan-from-the--internet)  
- - [Port forwarding](#port-forwarding)  
- - [Connect multiple networks](#connect-multiple-networks)  
- - [Automatic installation(Ubuntu)](#automatic-cloud-installation)  
- - [Manual Installation steps (Ubuntu)](#manual-cloud-installationubuntu) 
+ - [Management routing  and portforwarding using json file](#configjson-structure)
+ - [Connect to LAN from the internet](#connect-to-lan-from-the--internet)
+ - [Port forwarding](#port-forwarding)
+ - [Connect multiple networks](#connect-multiple-networks)
+ - [Automatic installation(Ubuntu)](#automatic-cloud-installation)
+ - [Manual Installation steps (Ubuntu)](#manual-cloud-installationubuntu)
 
 ## config.json structure
 
@@ -41,20 +41,21 @@ Access private network from the internet, support port forwarding from private n
 }
 ```
 Where
-- **USER_NAME** username or email  
-- **PASSWORD** user password  
-- **192.168.122.XX** uniq ip from range 192.168.122.10-192.168.122.254  
-- **APPLICATION_IP** service IP behind NAT (port forwarding)  
-- **APPLICATION_PORT** service PORT behind NAT (port forwarding)  
-- **REMOTE_PORT**  port accessible from the internet (port forwarding)  
-- **REMOTE_PORT**  port accessible from the internet (port forwarding)  
-- **ROUTING_TABLE**  ip with subnet for example 192.168.8.0/24  
+- **USER_NAME** username or email
+- **PASSWORD** user password
+- **192.168.122.XX** uniq ip from range 192.168.122.10-192.168.122.254
+- **APPLICATION_IP** service IP behind NAT (port forwarding)
+- **APPLICATION_PORT** service PORT behind NAT (port forwarding)
+- **REMOTE_PORT**  port accessible from the internet (port forwarding)
+- **REMOTE_PORT**  port accessible from the internet (port forwarding)
+- **ROUTING_TABLE**  ip with subnet for example 192.168.8.0/24
 
 ## Examples
 
 ### Connect to LAN from the  internet
-**user1** - router with subnet 192.168.8.0/24 behind NAT  
-**user2** - user who has access to subnet 192.168.8.0/24 from the Internet  
+![](https://github.com/vzakharchenko/docker-pptp-port-forwarding/blob/main/img/pptpRouting.png?raw=true)
+**user1** - router with subnet 192.168.88.0/24 behind NAT
+**user2** - user who has access to subnet 192.168.88.0/24 from the Internet
 ```
 {
   "users": {
@@ -63,7 +64,7 @@ Where
       "ip": "192.168.122.10",
       "routing": [
         {
-          "route": "192.168.8.0/24"
+          "route": "192.168.88.0/24"
         }
       ]
     },
@@ -76,8 +77,9 @@ Where
 ```
 
 ### Port forwarding
-**user** - router with subnet 192.168.8.0/24 behind NAT.  
-Subnet contains service http://192.168.8.1:80 which is available at from http://publicip.com:8888  
+![](https://github.com/vzakharchenko/docker-pptp-port-forwarding/blob/main/img/pptpWithRouting.png?raw=true)
+**user** - router with subnet 192.168.88.0/24 behind NAT.
+Subnet contains service http://192.168.8.254:80 which is available at from http://195.138.164.211:9000
 
 ```
 {
@@ -86,54 +88,50 @@ Subnet contains service http://192.168.8.1:80 which is available at from http://
       "password": "password",
       "ip": "192.168.122.10",
       "forwarding": [{
-        "sourceIp": "192.168.8.1",
+        "sourceIp": "192.168.88.1",
         "sourcePort": "80",
-        "destinationPort": 8888
+        "destinationPort": 9000
       }],
     }
   }
 }
 ```
 ### connect multiple networks
-**user** - router with subnet 192.168.7.0/24 behind NAT. Subnet contains service http://192.168.7.1:80 which is available at from http://publicip.com:8888  
-**user1** - router with subnet 192.168.111.0/24 behind NAT.  
-**user2** - router with subnet 192.168.100.0/24 behind NAT.  
-**user3** - user who has access to subnets 192.168.111.0/24 and 192.168.100.0/24 from the Internet  
+![](https://github.com/vzakharchenko/docker-pptp-port-forwarding/blob/main/img/pptpWithRouting2.png?raw=true)
+**user1** - router with subnet 192.168.88.0/24 behind NAT. Subnet contains service http://192.168.88.254:80 which is available at from http://195.138.164.211:9000
+**user2** - router with subnet 192.168.89.0/24 behind NAT.
+**user3** - user who has access to subnets 192.168.88.0/24 and 192.168.89.0/24 from the Internet
 ```
 {
   "users": {
-    "user": {
-      "password": "password",
+    "user1": {
+      "password": "password1",
       "ip": "192.168.122.10",
       "forwarding": [
         {
-          "sourceIp": "192.168.7.1",
+          "sourceIp": "192.168.88.254",
           "sourcePort": "80",
-          "destinationPort": 8888
+          "destinationPort": 9000
         }
-      ]
-    },
-    "user1": {
-      "password": "password1",
-      "ip": "192.168.122.11",
-      "routing": [
+      ],
+       "routing": [
         {
-          "route": "192.168.111.0/24"
+          "route": "192.168.88.0/24"
         }
       ]
     },
     "user2": {
-      "password": "password1",
-      "ip": "192.168.122.12",
+      "password": "password2",
+      "ip": "192.168.122.11",
       "routing": [
         {
-          "route": "192.168.100.0/24"
+          "route": "192.168.89.0/24"
         }
       ]
     },
     "user3": {
-      "password": "password2",
-      "ip": "192.168.122.13"
+      "password": "password3",
+      "ip": "192.168.122.12"
     }
   }
 }
@@ -141,14 +139,23 @@ Subnet contains service http://192.168.8.1:80 which is available at from http://
 
 
 ## Troubleshooting
-Viewing logs in docker container:
+1. Viewing logs in docker container:
 ```
 docker logs pptp-port-forwarding -f
 ```
+2. print routing tables
+```
+docker exec pptp-port-forwarding bash -c "ip route"
+```
+3. print iptable rules
+```
+docker exec pptp-port-forwarding bash -c "iptables -S"
+```
+
 
 ## Cloud Installation
 ### Automatic cloud installation
-[create /opt/config.json](#configjson-structure)  
+[create /opt/config.json](#configjson-structure)
 ```
 sudo apt-get update && sudo apt-get install -y curl
 curl -sSL https://raw.githubusercontent.com/vzakharchenko/docker-pptp-port-forwarding/main/ubuntu.install -o ubuntu.install
@@ -182,7 +189,7 @@ sysctl -w net.netfilter.nf_conntrack_helper=1
 sudo echo "net.ipv4.ip_forward=1">/etc/sysctl.conf
 sudo echo "net.netfilter.nf_conntrack_helper=1">/etc/sysctl.conf
 ```
-4. [create /opt/config.json](#configjson-structure)  
+4. [create /opt/config.json](#configjson-structure)
 
 5. start docker image
 

@@ -34,4 +34,6 @@ jobs:
           push: true
           tags: |
             vassio/docker-pptp-port-forwarding:latest
+            vassio/pptp-port-forwarding:latest
             vassio/docker-pptp-port-forwarding:1.3.2
+            vassio/pptp-port-forwarding:1.3.2

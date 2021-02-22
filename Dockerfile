@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM debian:buster-slim
 MAINTAINER Vasyl Zakharchenko <vaszakharchenko@gmail.com>
 LABEL author="Vasyl Zakharchenko"
 LABEL email="vaszakharchenko@gmail.com"

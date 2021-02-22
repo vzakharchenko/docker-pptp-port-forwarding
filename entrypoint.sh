@@ -8,4 +8,4 @@ chmod +x /opt/redir.sh
 chmod +x /etc/ppp/ip-up.d/routes-up
 service pptpd restart
 /opt/redir.sh
-tail -f /var/log/messages
+tail -f -n 100 /var/log/messages

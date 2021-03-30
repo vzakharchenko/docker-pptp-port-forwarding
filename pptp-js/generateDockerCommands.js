@@ -25,7 +25,7 @@ function parseFile(cJson) {
                     throw new Error(f.destinationPort + " already exists. user " + ports[f.destinationPort].user)
                 }
                 ports[f.destinationPort] = {user};
-                redir = redir + `-p ${f.destinationPort}:${f.destinationPort} `
+                redir = redir + `-p ${f.destinationIP?`${f.destinationIP}:`:''}${f.destinationPort}:${f.destinationPort} `
             })
         }
     });
